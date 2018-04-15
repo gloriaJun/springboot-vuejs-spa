@@ -1,0 +1,9 @@
+.DS_Store
+
+# configuration for gradle
+.gradle/
+
+# Intellij project files
+.idea/
+*.iml
+
