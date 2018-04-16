@@ -36,34 +36,29 @@ dependencies {
     testCompile("junit:junit")
 }
 
-bootJar {
-    baseName = 'spring-boot-vuejs-spa'
-    version =  projectVersion
-
-}
-
 // copy frontend dist
-task resourcesCopy(dependsOn: ':frontend:npmBuild') {
+//task resourcesCopy(dependsOn: ':frontend:npmBuild') {
+task resourcesCopy() {
     doLast {
         // copy template
         copy {
             from '../frontend/dist/index.html'
-            into 'src/main/resources/templates'
+            into 'build/main/resources/templates'
         }
         // copy static
         copy {
             from '../frontend/dist/static'
-            into 'src/main/resources/static/static/'
+            into 'build/main/resources/static/static'
         }
     }
 }
 
-// clean frontend dist
-task cleanWebBuild(dependsOn: ':frontend:npmClean', type: Delete) {
-    doLast {
-        delete 'src/main/resources/resources/static/'
-        delete 'src/main/resources/templates/'
-    }
+bootJar {
+    baseName = 'spring-boot-vuejs-spa'
+    version =  projectVersion
+
+    dependsOn ':frontend:npmBuild'
+    dependsOn 'resourcesCopy'
 }
 
 // gradle 버전 정의 (명시해주는 것을 권고한다고 함)
@@ -71,5 +66,4 @@ task wrapper(type: Wrapper) {
     gradleVersion = gradleVersion
 }
 
-bootJar.dependsOn resourcesCopy
-clean.dependsOn cleanWebBuild
+clean.dependsOn ':frontend:npmClean'
