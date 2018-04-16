@@ -42,12 +42,12 @@ task resourcesCopy(dependsOn: ':frontend:npmBuild') {
         // copy template
         copy {
             from '../frontend/dist/index.html'
-            into 'build/main/resources/templates'
+            into 'build/resources/main/templates'
         }
         // copy static
         copy {
             from '../frontend/dist/static'
-            into 'build/main/resources/static/static'
+            into 'build/resources/main/static/static'
         }
     }
 }
