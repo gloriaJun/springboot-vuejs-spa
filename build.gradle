@@ -1,6 +1,0 @@
-apply plugin: 'eclipse'
-apply plugin: 'idea'
-
-task webpack(type: Exec) {
-    inputs.file()
-}

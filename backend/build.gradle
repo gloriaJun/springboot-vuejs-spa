@@ -24,14 +24,14 @@ bootJar {
     version =  projectVersion
 }
 
+sourceCompatibility = javaVersion
+targetCompatibility = javaVersion
+compileJava.options.encoding = 'UTF-8'
+
 // 라이브러리 저장소 정의
 repositories {
     mavenCentral()
 }
-
-sourceCompatibility = javaVersion
-targetCompatibility = javaVersion
-compileJava.options.encoding = 'UTF-8'
 
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
@@ -39,6 +39,13 @@ dependencies {
     compile("ch.qos.logback:logback-core:${logbackVersion}")
     testCompile("junit:junit")
 }
+
+// copy frontend dist
+task copyTask(type: Copy) {
+    from '$rootDir/frontend/dist/index.html"'
+    into '$projectDir/src/main/resources/templates/'
+}
+
 
 // gradle 버전 정의 (명시해주는 것을 권고한다고 함)
 task wrapper(type: Wrapper) {

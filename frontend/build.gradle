@@ -11,14 +11,14 @@ node {
 //-------------------------------
 //    Tasks - NPM
 //-------------------------------
-task build(type: NpmTask) {
+task npmBuild(type: NpmTask) {
   args = ['run', 'build']
 }
 
-task start(type: NpmTask) {
+task npmStart(type: NpmTask) {
   args = ['start']
 }
 
-build.dependsOn(npmInstall)
-start.dependsOn(npmInstall)
+npmBuild.dependsOn(npmInstall)
+npmStart.dependsOn(npmInstall)
 
