@@ -36,9 +36,8 @@ dependencies {
     testCompile("junit:junit")
 }
 
-// copy frontend dist
-//task resourcesCopy(dependsOn: ':frontend:npmBuild') {
-task resourcesCopy() {
+// frontend build & copy to build dir
+task resourcesCopy(dependsOn: ':frontend:npmBuild') {
     doLast {
         // copy template
         copy {
@@ -57,7 +56,6 @@ bootJar {
     baseName = 'spring-boot-vuejs-spa'
     version =  projectVersion
 
-    dependsOn ':frontend:npmBuild'
     dependsOn 'resourcesCopy'
 }
 
